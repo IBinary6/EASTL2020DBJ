@@ -10,47 +10,24 @@
 #include <stdlib.h>
 #include <malloc.h>
 
+#ifndef EASTL_USER_DEFINED_ALLOCATOR
+// 
+// CAUTION! see allocator_eastl.cpp 
+//          
+inline void* __cdecl operator new[](size_t size, char const*, int, unsigned int, char const*, int)
+{
+	return calloc(size, sizeof(char));
+}
 
-//Here we start definining mandatory alloc / dealloc functions
-//NOTE: they are always required
-//NOTE: yes they will be simplified
-
-namespace eastl {
-	extern "C" {
-
-		inline void* user_defined_alloc(
-			size_t size_,
-			const char* pName,
-			int flags,
-			unsigned debugFlags,
-			const char* file,
-			int line
-		) noexcept
-		{
-			return malloc(size_) ;
-		}
-
-		// alligned allocation
-		inline void* user_defined_alloc_aligned(
-			size_t size_,
-			size_t alignment_,
-			size_t alignmentOffset,
-			const char* pName,
-			int flags,
-			unsigned debugFlags,
-			const char* file,
-			int line
-		) noexcept
-		{
-			return malloc(size_);
-		}
-
-		inline void user_defined_deallocate(void* ptr_) noexcept
-		{
-			free(ptr_);
-		}
-	} // "C"
-} // eastl ns
+// this is aligned allocation
+// vector et. all do require this
+// string does not
+inline void* __cdecl operator new[](size_t size, size_t alignment, unsigned __int64, char const*, int, unsigned int, char const*, int)
+{
+	return _aligned_malloc(size, alignment);
+	// return calloc(size, sizeof(char));
+}
+#endif // ! EASTL_USER_DEFINED_ALLOCATOR
 
 
 

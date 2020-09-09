@@ -1,7 +1,6 @@
 
-#include "dbj_common.h"
+#include "infrastructure/dbj_common.h"
 
-#define OTHER_TESTS
 #undef SHORT_SPECIMEN
 #define ONE_MILLION 1000000
 
@@ -21,13 +20,13 @@ static void performance_test() noexcept
 	constexpr size_t str_specimen_size_  = sizeof(str_specimen_) ;
 
 	printf(VT100_LIGHT_GREEN);
-	PROMPT("specimen", str_specimen_);
+	DBJ_PROMPT("specimen", str_specimen_);
 	printf(VT100_RESET);
 
-	char buff[0xFF]{ 0 };
-	sprintf_s(buff, 0xFF, "%03.1f", double(loop_length) / ONE_MILLION);
-
-	PROMPT("Test Loop length (millions)", buff);
+	DBJ_PROMPT(
+		"Test Loop length (millions)", 
+		double_to_buff("%03.1f", double(loop_length) / ONE_MILLION).data 
+	);
 
 	auto test_loop = [&](auto str_specimen, auto vec_of_strings, auto rezult_prompt) {
 
@@ -46,9 +45,7 @@ static void performance_test() noexcept
 		}
 		end = clock();
 
-		char buff[0xFF]{ 0 };
-		sprintf_s(buff, 0xFF, "%f", seconds_(end, start));
-		PROMPT(rezult_prompt, buff);
+		DBJ_PROMPT(rezult_prompt, double_to_buff("%f", seconds_(end, start)).data );
 	};
 
 	// for fixed eastl versions
@@ -89,75 +86,38 @@ static void performance_test() noexcept
 #endif //!  _KERNEL_MODE
 } // performance_test
 
-#ifdef OTHER_TESTS
-
-int eastl_test_vector();
-int eastl_test_vector_map();
-int test_hash_map_string();
-
-#endif // OTHER_TESTS
-
-int main(const int argc, char** argv)
+extern "C"  int testing_sampling(const int argc, char** argv)
 {
-	constexpr auto dbj_test_loop_size_ = ONE_MILLION * 2;
+	constexpr auto dbj_test_loop_size_ = ONE_MILLION / 2 ;
 
-#ifdef _WIN32
-	win_enable_vt_100_and_unicode();
-	// warning: will exit(-1) on mistakes made
-	// font name is case sensitive
-	// if your font name is not found default is used
-	win_set_console_font(L"Consolas", 24);
-#endif
-
-	printf(VT100_LIGHT_BLUE);
-	PROMPT("DBJ EASTL2010", "*********************************" );
-	printf(VT100_RESET);
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ EASTL2010" , "" ); printf(VT100_RESET);
 
 #ifdef _KERNEL_MODE
-	SHOW(_KERNEL_MODE);
+	DBJ_SHOW(_KERNEL_MODE);
 #endif // _KERNEL_MODE
 
 #ifdef __clang__
-	SHOW(__VERSION__);
+	DBJ_SHOW(__VERSION__);
 #else
-	SHOW(DBJ_STRINGIZE(_MSC_FULL_VER));
+	DBJ_SHOW(DBJ_STRINGIZE(_MSC_FULL_VER));
 #endif
 
-	SHOW(DBJ_STRINGIZE(__cplusplus));
-	SHOW(__TIMESTAMP__);
+	DBJ_SHOW(DBJ_STRINGIZE(__cplusplus));
+	DBJ_SHOW(__TIMESTAMP__);
 
 #ifdef _DEBUG
-	SHOW(DBJ_STRINGIZE(_DEBUG));
+	DBJ_SHOW(DBJ_STRINGIZE(_DEBUG));
 #else
-	SHOW(DBJ_STRINGIZE(NDEBUG));
+	DBJ_SHOW(DBJ_STRINGIZE(NDEBUG));
 #endif
 	printf(VT100_RESET);
 
-#ifndef _KERNEL_MODE
-	try {
-#endif // _KERNEL_MODE
+
 		performance_test<dbj_test_loop_size_, 0>();
 		performance_test<dbj_test_loop_size_, 1>();
 
-#ifdef OTHER_TESTS
-		eastl_test_vector();
-		eastl_test_vector_map();
-		test_hash_map_string();
-#endif // OTHER_TESTS
-
-#ifndef _KERNEL_MODE
-	}
-	catch (std::exception& x_)
-	{
-		printf("\nstd::exception \"%s\"", x_.what());
-	}
-	catch (...)
-	{
-		printf("\nUnknown exception ...?");
-	}
-#endif // _KERNEL_MODE
 
 	printf(VT100_LIGHT_GREEN "\n\nDone ...\n\n" VT100_RESET);
 
-
+	return EXIT_SUCCESS;
 }

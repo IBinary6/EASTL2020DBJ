@@ -129,6 +129,12 @@
     <ClCompile Include="..\source\string.cpp" />
     <ClCompile Include="..\source\thread_support.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="testing_sampling.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="infrastructure\dbj_common.h" />
+    <ClInclude Include="infrastructure\mandatory.h" />
+    <ClInclude Include="infrastructure\win_console.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
