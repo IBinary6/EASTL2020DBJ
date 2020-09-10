@@ -119,9 +119,8 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\allocator_eastl.cpp" />
     <ClCompile Include="..\source\assert.cpp" />
-    <ClCompile Include="..\source\fixed_pool.cpp" />
+    <ClCompile Include="..\source\dbj_allocator.cpp" />
     <ClCompile Include="..\source\hashtable.cpp" />
     <ClCompile Include="..\source\intrusive_list.cpp" />
     <ClCompile Include="..\source\numeric_limits.cpp" />
@@ -132,6 +131,7 @@
     <ClCompile Include="testing_sampling.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\EASTL\allocator.h" />
     <ClInclude Include="infrastructure\dbj_common.h" />
     <ClInclude Include="infrastructure\mandatory.h" />
     <ClInclude Include="infrastructure\win_console.h" />

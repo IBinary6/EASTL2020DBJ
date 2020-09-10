@@ -1,96 +1,71 @@
 
 #include "infrastructure/dbj_common.h"
 
-#undef SHORT_SPECIMEN
-#define ONE_MILLION 1000000
+//-------------------------------------------------------------------
+constexpr size_t ONE_MILLION = 1000000;
+constexpr size_t inner_test_loop_size_ = ONE_MILLION / 2;
+constexpr size_t outer_loop_size{ 10 };
 
+constexpr const char* test_data[]{
+"Hello",
+"Hello young fellow from the shallow, why are you so mellow?"
+" Perhaps thy friend is a badfellow?"
+};
+
+//-------------------------------------------------------------------
 template < size_t loop_length, unsigned specimen_index_ >
-static void performance_test() noexcept
+static auto performance_test() noexcept
 {
-	PROLOG;
-
 	static_assert(specimen_index_ < 2);
 
-	constexpr const char* specimen[]{
-	"Hello",
-	"Hello young fellow from the shallow, why are you so mellow?"
-	" Perhaps thy friend is a badfellow?"
-	};
-	constexpr const char*  str_specimen_ = specimen[specimen_index_];
+	constexpr const char*  str_specimen_ = test_data[specimen_index_];
 	constexpr size_t str_specimen_size_  = sizeof(str_specimen_) ;
 
-	printf(VT100_LIGHT_GREEN);
-	DBJ_PROMPT("specimen", str_specimen_);
-	printf(VT100_RESET);
-
-	DBJ_PROMPT(
-		"Test Loop length (millions)", 
-		double_to_buff("%03.1f", double(loop_length) / ONE_MILLION).data 
-	);
-
-	auto test_loop = [&](auto str_specimen, auto vec_of_strings, auto rezult_prompt) {
+	auto test_loop = [&](auto str_specimen, auto vec_of_strings ) {
 
 		auto seconds_ = [](double E_, double S_) constexpr ->double
 		{
 			return ((E_)-(S_)) / (CLOCKS_PER_SEC);
 		};
 
-		clock_t start{};
-		clock_t end{};
-
-		start = clock();
-		for (size_t i = 0; i < loop_length; i++)
+		clock_t start = clock();
+		for (size_t i = 0; i < loop_length; ++i)
 		{
 			vec_of_strings.push_back(str_specimen);
 		}
-		end = clock();
+		clock_t end = clock();
 
-		DBJ_PROMPT(rezult_prompt, double_to_buff("%f", seconds_(end, start)).data );
-	};
+		return seconds_(end, start) ;
+	}; // test_loop
 
-	// for fixed eastl versions
-	// we can do only small strings
-	if constexpr (specimen_index_ == 0 ) {
-		// Can hold up to a strlen of str_specimen_size_ + 1.
-		// overflow is not taken care of
-		// this uses stack and can not be very big 
-		using my_fixed_string = eastl::fixed_string<char, str_specimen_size_ + 1, false>;
-
-		// this uses stack and can not be very big 
-		using my_fixed_vector = eastl::fixed_vector< my_fixed_string, loop_length + 1, false >;
-
-		test_loop(
-			my_fixed_string{ str_specimen_ },
-			eastl::vector<my_fixed_string>{},
-			"EA STL using fixed string (seconds)"
-		);
-	}
-
-	test_loop(
+	double eastl_seconds = test_loop(
 		eastl::string{ str_specimen_ },
-		eastl::vector<eastl::string>{},
-		"EA STL (seconds)"
+		eastl::vector<eastl::string>{}
 	);
 
 	// no std lib in kernel mode 
 #ifndef _KERNEL_MODE
 
-	test_loop(
+	double std_seconds = test_loop(
 		std::string{ str_specimen_ },
-		std::vector<std::string>{},
-		"STD STL (seconds)"
+		std::vector<std::string>{}
 	);
 
 #else  // ! _KERNEL_MODE
+	double std_seconds = 0;
 	printf("\n Can not use std lib in kernel mode.");
 #endif //!  _KERNEL_MODE
+	struct rezult_struct final { double eastl_rezult{}; double std_rezult{}; };
+
+return rezult_struct { eastl_seconds , std_seconds } ;
+
 } // performance_test
+
+  //-------------------------------------------------------------------
 
 extern "C"  int testing_sampling(const int argc, char** argv)
 {
-	constexpr auto dbj_test_loop_size_ = ONE_MILLION / 2 ;
-
-	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ EASTL2010" , "" ); printf(VT100_RESET);
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ CORE EASTL2020" , "" ); printf(VT100_RESET);
 
 #ifdef _KERNEL_MODE
 	DBJ_SHOW(_KERNEL_MODE);
@@ -99,25 +74,48 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 #ifdef __clang__
 	DBJ_SHOW(__VERSION__);
 #else
-	DBJ_SHOW(DBJ_STRINGIZE(_MSC_FULL_VER));
+	DBJ_PROMPT("_MSC_FULL_VER", int_to_buff("%d", _MSC_FULL_VER).data);
 #endif
 
-	DBJ_SHOW(DBJ_STRINGIZE(__cplusplus));
+	DBJ_PROMPT("__cplusplus", int_to_buff("%d", __cplusplus).data);
 	DBJ_SHOW(__TIMESTAMP__);
 
 #ifdef _DEBUG
-	DBJ_SHOW(DBJ_STRINGIZE(_DEBUG));
+	DBJ_PROMPT("_DEBUG", "debug build");
 #else
-	DBJ_SHOW(DBJ_STRINGIZE(NDEBUG));
+	DBJ_PROMPT("NDEBUG", "release build");
 #endif
-	printf(VT100_RESET);
 
+	DBJ_PROMPT("Testing"," vector of strings");
+	DBJ_PROMPT("Outer loop size", int_to_buff("%d", outer_loop_size ).data );
+	DBJ_PROMPT(
+		"Vector size (millions)",
+		double_to_buff("%03.1f", double(inner_test_loop_size_) / ONE_MILLION).data
+	);
+	DBJ_PROMPT("Test strings", "size");
+	DBJ_PROMPT("String 0", int_to_buff("%lu", strlen(test_data[0])).data);
+	DBJ_PROMPT("String 1", int_to_buff("%lu", strlen(test_data[1])).data);
 
-		performance_test<dbj_test_loop_size_, 0>();
-		performance_test<dbj_test_loop_size_, 1>();
+	double total_eastl = 0;
+	double total_std   = 0;
 
+	for (size_t k = 0 ; k < outer_loop_size; ++k ) {
+		auto r_0 = performance_test<inner_test_loop_size_, 0>();
 
-	printf(VT100_LIGHT_GREEN "\n\nDone ...\n\n" VT100_RESET);
+		total_eastl += r_0.eastl_rezult;
+		total_std   += r_0.std_rezult;
+
+		auto r_1 = performance_test<inner_test_loop_size_, 1>();
+
+		total_eastl += r_0.eastl_rezult;
+		total_std += r_0.std_rezult;
+	}
+	DBJ_PROMPT("Accumulated rezults","(seconds on average)");
+	printf(VT100_LIGHT_RED );
+	DBJ_PROMPT("EASTL   rezult ", double_to_buff("%f", total_eastl / outer_loop_size ).data );
+	DBJ_PROMPT("STD STL rezult ", double_to_buff("%f", total_std / outer_loop_size ).data );
+	DBJ_PROMPT("Done ...", "");
+	printf("\n");
 
 	return EXIT_SUCCESS;
 }

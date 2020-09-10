@@ -63,18 +63,18 @@
 #endif // _KERNEL_MODE
 
 #include "EASTL/string.h"
-#include "EASTL/fixed_string.h"
+// #include "EASTL/fixed_string.h"
 #include "EASTL/vector.h"
-#include "EASTL/fixed_vector.h"
+// #include "EASTL/fixed_vector.h"
 
 #undef DBJ_PROMPT
-#define DBJ_PROMPT(P_, S_) printf("\n" VT100_INVERSE "%-36s" VT100_RESET VT100_ULINE "%24s" VT100_RESET  , P_, S_)
+#define DBJ_PROMPT(P_, S_) printf("\n" VT100_INVERSE "  %-36s" VT100_RESET VT100_ULINE "%24s" VT100_RESET  , P_, S_)
 
 #undef DBJ_SHOW_
 #define DBJ_SHOW(X_) DBJ_PROMPT(#X_, X_)
 
-#undef PROLOG
-#define PROLOG printf(VT100_LIGHT_CYAN VT100_INVERSE "\n\n%-60s" VT100_RESET, __FUNCSIG__ )
+#undef DBJ_PROLOG
+#define DBJ_PROLOG printf("\n\n" VT100_LIGHT_CYAN VT100_INVERSE "%-60s" VT100_RESET, __FUNCSIG__ )
 
 extern "C" {
 
