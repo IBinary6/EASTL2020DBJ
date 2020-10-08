@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\EASTL\allocator.h" />
     <ClInclude Include="infrastructure\dbj_common.h" />
+    <ClInclude Include="infrastructure\dbj_heap_alloc.h" />
     <ClInclude Include="infrastructure\mandatory.h" />
     <ClInclude Include="infrastructure\win_console.h" />
   </ItemGroup>

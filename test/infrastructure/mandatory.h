@@ -12,7 +12,7 @@
 
 #ifndef EASTL_USER_DEFINED_ALLOCATOR
 // 
-// CAUTION! see allocator_eastl.cpp 
+// 
 //          
 inline void* __cdecl operator new[](size_t size, char const*, int, unsigned int, char const*, int)
 {

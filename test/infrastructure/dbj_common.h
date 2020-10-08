@@ -63,8 +63,9 @@
 #endif // _KERNEL_MODE
 
 #include "EASTL/string.h"
-// #include "EASTL/fixed_string.h"
 #include "EASTL/vector.h"
+
+// #include "EASTL/fixed_string.h"
 // #include "EASTL/fixed_vector.h"
 
 #undef DBJ_PROMPT
