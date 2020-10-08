@@ -17,9 +17,9 @@ What will be left will surely be good and functional. EASTL team certainly knows
 
 I promise we will always try and inform EASTL guys if we have any relevant questions or puzzles to solve. Or if we think we can contribute to the mother ship in any way.
 
-So it seems I have a lot of free time? I wish. We "here" are building WIN SVR components. We use Visual Studio 2019, and each project has the [/kernel switch](https://shorturl.at/gGMNO) present. That means (among other limitations) no std lib. 
+So it seems I have a lot of free time? I wish. We "here" are building WIN SVR components. We use Visual Studio 2019, and each project has the [/kernel switch](https://shorturl.at/gGMNO) present. That means no standard C++, not throw/try/catch keywords, no RAII and a such. 
 
-So this is now Windows only? I hope not. But I have no Linux machine readily available. Whoever tests this on
+So this is repo now Windows only? I hope not. But I have no Linux machine readily available. Whoever tests this on
 Linux or Mac please do let me know. We will cook the CIRCLE CI setup after that.
 
 Same is for VS Code build. If you think you can contribute your .vscode folder please come forward.
