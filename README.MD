@@ -1,9 +1,9 @@
 
 ## Now what is this? Yet another EASTL not-a-fork?
 
-Well first of all these days it is [not possible](https://github.com/electronicarts/EASTL/issues/302) just to simply git pull the EASTL. So I had to download the source using vcpkg, did some local shenanigans, some copies, builds and runs; and then push to this repository.
+Well first of all these days it is [not possible](https://github.com/electronicarts/EASTL/issues/302) just to simply git pull the EASTL. So I had to download the source using vcpkg. Then I did some local shenanigans, some copies, builds and runs; and then pushed the result to this repository.
 
-Why? In all of my innocence I had grand plans for EASTL use over "here". Alas. Soon, I have faced the reality. By 2020 EASTL has become (very) big and (not very) over engineered. Not to my liking at all.
+Why? In all of my innocence I had grand plans for EASTL use over "here". Alas. Soon, I have faced the reality. By 2020 EASTL has become big and over engineered. Not to my liking at all. Thus.
 
 ### I have decided, for this repo, to:
 
@@ -26,8 +26,8 @@ This is time consuming and ambitious plan for one person team. Stay tuned :wink:
 ## Some explanations
 
 - In the source, seek the `dbj` namespace for news and changes.
-- test folder contains Visual Studio solution. Start snooping from there :wink:
-- `dbj_allocator.cpp` and `<EASTL/allocator.h>` are the files with ost of the new stuff
+- test folder contains Visual Studio solution. Start snooping from there
+- `dbj_allocator.cpp` and `<EASTL/allocator.h>` are the files with most of the new stuff
 - test/infrastructure  common contains `dbj_common.h`, this is where "everything" is included for testing which is in `testing_sampling.cpp`.
 
 ## Performance sampling: EASTL vs MS STL
@@ -36,7 +36,7 @@ This is time consuming and ambitious plan for one person team. Stay tuned :wink:
      - MS STL replaces them with [SEH](https://docs.microsoft.com/en-us/cpp/cpp/structured-exception-handling-c-cpp?view=vs-2019)
      - EASTL does its own assert, which results in `__debugbreak()`
 - RTTI we keep always off, too
-- Road Map : in case of Structured Exception raised and caught, minidump is generated, and user is informed on its full path.
+- Road Map : in case of Structured Exception raised and caught, minidump is generated, and finally user is informed on its full path.
 - 32 bit builds we ignore, as ever
 - Hint: in debug builds MS STL is indeed rather slow, but in release builds it is not
 
