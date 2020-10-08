@@ -41,16 +41,16 @@ int main(int argc, char* argv[])
 
 #ifdef _WIN32
 	win_enable_vt_100_and_unicode();
-	win_set_console_font(L"Consolas", 18 );
+	win_set_console_font(L"Consolas", 24 );
 #endif
 
-#if (!defined( _KERNEL_MODE )) || EASTL_EXCEPTIONS_ENABLED
+#if EASTL_EXCEPTIONS_ENABLED
 	try {
-#endif // _KERNEL_MODE
+#endif // EASTL_EXCEPTIONS_ENABLED
 
 		testing_sampling(argc, argv);
 
-#if (!defined( _KERNEL_MODE )) || EASTL_EXCEPTIONS_ENABLED
+#if EASTL_EXCEPTIONS_ENABLED
 	}
 	catch (std::exception& x_)
 	{
@@ -60,7 +60,8 @@ int main(int argc, char* argv[])
 	{
 		printf("\nUnknown exception ...?");
 	}
-#endif // _KERNEL_MODE
+#endif // EASTL_EXCEPTIONS_ENABLED
+
 #if 0
 	using namespace eastl;
 

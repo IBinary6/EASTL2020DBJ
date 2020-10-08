@@ -30,5 +30,18 @@ This is time consuming and ambitious plan for one person team. Stay tuned :wink:
 - `dbj_allocator.cpp` and `<EASTL/allocator.h>` are the files with ost of the new stuff
 - test/infrastructure  common contains `dbj_common.h`, this is where "everything" is included for testing which is in `testing_sampling.cpp`.
 
+## Performance sampling: EASTL vs MS STL
+
+- when we test, c++ exceptions are always off
+     - MS STL replaces them with [SEH](https://docs.microsoft.com/en-us/cpp/cpp/structured-exception-handling-c-cpp?view=vs-2019)
+     - EASTL does its own assert, which results in `__debugbreak()`
+- RTTI is always off, too
+- W.I.P. : in case of Structured Exception raised and caught, minidump is generated, and user is informed on its full path.
+- 32 bit builds we ignore, as ever
+- Hint: in debug builds MS STL is indeed rather slow, but in release builds it is not
+
+
+Enjoy
+
 Sep/Oct  2020
 [DBJ](https://dbj.org/)

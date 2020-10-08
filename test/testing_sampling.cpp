@@ -3,7 +3,7 @@
 
 //-------------------------------------------------------------------
 constexpr size_t ONE_MILLION = 1000000;
-constexpr size_t inner_test_loop_size_ = ONE_MILLION / 1 ;
+constexpr size_t inner_test_loop_size_ = ONE_MILLION * 2 ;
 constexpr size_t outer_loop_size{ 10 };
 
 struct test_data {
@@ -79,9 +79,17 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 {
 	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ CORE EASTL2020" , "" ); printf(VT100_RESET);
 
-#ifdef _KERNEL_MODE
-	DBJ_SHOW(_KERNEL_MODE);
-#endif // _KERNEL_MODE
+#if _HAS_EXCEPTIONS
+	DBJ_PROMPT("_HAS_EXCEPTIONS == ", "1");
+#else
+	DBJ_PROMPT("_HAS_EXCEPTIONS == ", "0");
+#endif
+
+#if EASTL_EXCEPTIONS_ENABLED
+	DBJ_PROMPT("EASTL_EXCEPTIONS_ENABLED == ", "1");
+#else
+	DBJ_PROMPT("EASTL_EXCEPTIONS_ENABLED == ", "0");
+#endif
 
 #ifdef __clang__
 	DBJ_SHOW(__VERSION__);
