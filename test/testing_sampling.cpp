@@ -1,16 +1,15 @@
 
 #include "infrastructure/dbj_common.h"
+#include "testing_parameters.h"
 
 //-------------------------------------------------------------------
-constexpr size_t ONE_MILLION = 1000000;
-constexpr size_t inner_test_loop_size_ = ONE_MILLION * 2 ;
-constexpr size_t outer_loop_size{ 10 };
 
-struct test_data {
-	constexpr static const char(&small_string)[] {
+struct test_data final 
+{
+	constexpr static const char small_string [6] {
 		"Hello"
 	};
-	constexpr static const char(&big_string)[] {
+	constexpr static const char big_string [95] {
 		"Hello young fellow from the shallow, why are you so mellow?"
 			" Perhaps thy friend is a badfellow?"
 	};
@@ -26,8 +25,8 @@ struct test_data {
 template < size_t loop_length, unsigned specimen_index_ >
 static auto performance_test() noexcept
 {
-	constexpr const char* str_specimen_ = test_data{} [specimen_index_] ;
-	constexpr size_t str_specimen_size_  = sizeof(str_specimen_) ;
+	/*constexpr*/ const char* str_specimen_ = test_data{} [specimen_index_] ;
+	// constexpr size_t str_specimen_size_  = sizeof(str_specimen_) ;
 
 	auto test_loop = [&](auto str_specimen, auto vec_of_strings ) {
 
@@ -51,18 +50,11 @@ static auto performance_test() noexcept
 		eastl::vector<eastl::string>{}
 	);
 
-	// no std lib in kernel mode 
-#ifndef _KERNEL_MODE
-
 	double std_seconds = test_loop(
 		std::string{ str_specimen_ },
 		std::vector<std::string>{}
 	);
 
-#else  // ! _KERNEL_MODE
-	double std_seconds = 0;
-	printf("\n Can not use std lib in kernel mode.");
-#endif //!  _KERNEL_MODE
 	struct rezult_struct final
 	{ 
       double eastl_rezult{}; 
@@ -80,7 +72,7 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , " " ); 
 	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ CORE EASTL2020" , "(c) 2020 dbj@dbj.org" );
 	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , "dbj.org/license_dbj" );
-	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , " " );
+	                          DBJ_PROMPT( " " , " " );
 
 #if _HAS_EXCEPTIONS
 	DBJ_PROMPT("_HAS_EXCEPTIONS == ", "1");
@@ -95,7 +87,7 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 #endif
 
 #ifdef __clang__
-	DBJ_SHOW(__VERSION__);
+	DBJ_PROMPT("__clang_", __VERSION__);
 #else
 	DBJ_PROMPT("_MSC_FULL_VER", int_to_buff("%d", _MSC_FULL_VER).data);
 #endif
@@ -109,7 +101,7 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 	DBJ_PROMPT("NDEBUG", "release build");
 #endif
 
-	DBJ_PROMPT("Testing"," vector of strings");
+	DBJ_PROMPT("Testing"," vector<strings>");
 	DBJ_PROMPT("Outer loop size", int_to_buff("%d", outer_loop_size ).data );
 	DBJ_PROMPT(
 		"Vector size (millions)",
@@ -133,7 +125,7 @@ extern "C"  int testing_sampling(const int argc, char** argv)
 		total_eastl += r_1.eastl_rezult;
 		total_std   += r_1.std_rezult;
 	}
-	DBJ_PROMPT("Accumulated rezults","(seconds on average)");
+	DBJ_PROMPT("Rezults per inner loop","(seconds on average)");
 	printf(VT100_LIGHT_RED );
 	DBJ_PROMPT("EASTL        rezult ", double_to_buff("%f", total_eastl / outer_loop_size ).data );
 	DBJ_PROMPT("STD STL      rezult ", double_to_buff("%f", total_std / outer_loop_size ).data );

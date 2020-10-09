@@ -40,8 +40,10 @@ int main(int argc, char* argv[])
 {
 
 #ifdef _WIN32
-	win_enable_vt_100_and_unicode();
-	win_set_console_font(L"Consolas", 24 );
+	// win_enable_vt_100_and_unicode();
+	// ugly hack to enable VT100 on cmd.exe
+	system(" ");
+	// win_set_console_font(L"Consolas", 18);
 #endif
 
 #if EASTL_EXCEPTIONS_ENABLED
@@ -54,34 +56,35 @@ int main(int argc, char* argv[])
 	}
 	catch (std::exception& x_)
 	{
-		printf("\nstd::exception \"%s\"", x_.what());
+		fprintf(stderr, "\nstd::exception \"%s\"", x_.what());
 	}
 	catch (...)
 	{
-		printf("\nUnknown exception ...?");
+		fprintf(stderr, "\nUnknown exception ...?");
 	}
 #endif // EASTL_EXCEPTIONS_ENABLED
-
-#if 0
-	using namespace eastl;
-
-	// this requires C++17 or better
-#ifdef __cpp_deduction_guides
-	array a = { 1,2,3,4 };
-
-	vector v = { 1,2,3,4 };
-#endif
-
-	string hello("Hello World!");
-
-	printf("%s", hello.data());
-#endif
 
 	#ifdef _MSC_VER
 	system("@pause");
 	#endif // _MSC_VER
 	return 42;
 }
+
+#ifdef __cpp_deduction_guides
+#include <EASTL/array.h>
+// Also works with DBJ EASTL 2020
+// Requires C++17 or better
+static void test_eastl_deduction_guides() {
+	{
+		eastl::array a = { 1,2,3,4 };
+		eastl::vector v = { 1,2,3,4 };
+
+		(void(a));
+		(void(v));
+	}
+}
+#endif // __cpp_deduction_guides
+
 
 
 
