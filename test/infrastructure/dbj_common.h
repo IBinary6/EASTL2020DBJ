@@ -1,4 +1,6 @@
 #pragma once
+/* (c) 2019-2020 by dbj.org   -- LICENSE DBJ -- https://dbj.org/license_dbj/ */
+
 
 #define VT100_ESC "\x1b["
 
@@ -15,7 +17,7 @@
 #define VT100_LIGHT_RED VT100_ESC "31m"
 #define VT100_LIGHT_MAGENTA VT100_ESC "35m"
 
-/* (c) 2019-2020 by dbj.org   -- LICENSE DBJ -- https://dbj.org/license_dbj/ */
+#if 0
 
 #undef DBJ_EXP_
 #undef DBJ_EXP
@@ -44,29 +46,13 @@
 #define _POSIX_C_SOURCE 200809L
 #endif
 
-#ifdef _WIN32
-#include "win_console.h"
-#endif
-
-#include <EASTL/internal/config.h>
+#endif // 0
 
 // the mandatory user delivered alloc / dealloc functions
 #include "mandatory.h"
 
 #include <stdio.h>
 #include <time.h>
-
-#ifndef _KERNEL_MODE
-#include <string>
-#include <vector>
-#include <exception>
-#endif // _KERNEL_MODE
-
-#include "EASTL/string.h"
-#include "EASTL/vector.h"
-
-// #include "EASTL/fixed_string.h"
-// #include "EASTL/fixed_vector.h"
 
 #undef DBJ_PROMPT
 #define DBJ_PROMPT(P_, S_) printf("\n" VT100_INVERSE "  %-36s" VT100_RESET VT100_ULINE "%24s" VT100_RESET  , P_, S_)
