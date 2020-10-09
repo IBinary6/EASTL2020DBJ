@@ -6,3 +6,7 @@ Debug
 *.suo
 *.filters
 *.user
+*.ilk
+*.obj
+*.pdb
+*.exe
