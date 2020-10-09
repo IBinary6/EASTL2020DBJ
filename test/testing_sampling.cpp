@@ -77,7 +77,10 @@ return rezult_struct { eastl_seconds , std_seconds } ;
 
 extern "C"  int testing_sampling(const int argc, char** argv)
 {
-	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ CORE EASTL2020" , "" ); printf(VT100_RESET);
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , " " ); 
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( "DBJ CORE EASTL2020" , "(c) 2020 dbj@dbj.org" );
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , "dbj.org/license_dbj" );
+	printf(VT100_LIGHT_BLUE); DBJ_PROMPT( " " , " " );
 
 #if _HAS_EXCEPTIONS
 	DBJ_PROMPT("_HAS_EXCEPTIONS == ", "1");

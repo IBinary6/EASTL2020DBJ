@@ -1,17 +1,28 @@
 
-## Now what is this? Yet another EASTL not-a-fork?
+![results_2020_oct](./media/2020_OCT_screen.png)
+
+## Now what is this? Yet another EASTL, not-a-fork?
 
 Well first of all these days it is [not possible](https://github.com/electronicarts/EASTL/issues/302) just to simply git pull the EASTL. So I had to download the source using vcpkg. Then I did some local shenanigans, some copies, builds and runs; and then pushed the result to this repository.
 
 Why? In all of my innocence I had grand plans for EASTL use over "here". Alas. Soon, I have faced the reality. By 2020 EASTL has become big and over engineered. Not to my liking at all. Thus.
 
-### I have decided, for this repo, to:
+### I have decided to:
 
 - completely change the allocator design
   - that is done
 - remove the EASTL specific containers
-  - we have funny results with fixed_ bunch, they appears slower?
-  - honestly we do not need containers that much after all, beside string and vector of course
+  - we have funny thoughts about the fixed_ bunch
+      - fixed_ is ok for small-ish sizes having standard interface
+      - but for that we use native arrays, also because of the kind of the projects
+      - but also because we do seriously like using C11 + VLA declarations
+      ```cpp
+      typedef point3d(*pointer_to_matrix)[3][3];
+      pointer_to_matrix pm_ = (pointer_to_matrix)
+      malloc( sizeof(point3d[3][3]) );
+      ```
+  - honestly, we do not need containers that much after all, beside string and vector of course
+      - we are very careful to minimize the C++ string usage
 
 What is left is good and functional. But understand this: EASTL team certainly knows how to C++. I promise we will always try and inform EASTL guys if we have any relevant questions or puzzles to solve. Or if we think we can contribute to the mother ship in any way.
 
