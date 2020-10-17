@@ -1,28 +1,25 @@
-#ifndef VT100_VT100WIN10_INCLUDED
-#define VT100_VT100WIN10_INCLUDED
-/* (c) 2019 by dbj.org   -- CC BY-SA 4.0 -- https://creativecommons.org/licenses/by-sa/4.0/ */
+#pragma once
 
-/*
-VT100 ESC codes for coloring the WIN10 PRO console output
-full explanation:
-https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences?redirectedfrom=MSDN
-*/
-// #define VT100_ESC "\x1b"
-#define VT100_CSI "\x1b["
+#include <sdkddkver.h>
 
-#define VT100_CLS VT100_CSI "2J"
-#define VT100_RESET VT100_CSI "0m"
-#define VT100_BOLD_FG VT100_CSI "1m"
-#define VT100_ULINE VT100_CSI "4m"
-#define VT100_ULINE_OFF VT100_CSI "24m"
-#define VT100_COLOR_SWAP VT100_CSI "7m"
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
 
-#define VT100_FG_RED VT100_CSI "31m"
-#define VT100_FG_GREEN VT100_CSI "32m"
-#define VT100_FG_YELLOW VT100_CSI "33m"
-#define VT100_FG_BLUE VT100_CSI "34m"
-#define VT100_FG_CYAN VT100_CSI "36m"
-#define VT100_FG_WHITE VT100_CSI "37m"
+#define VT100_ESC  "\x1b["
+// #define VT100_ESCAPE  "\x1b["
+
+#define VT100_CLS VT100_ESC  "2J"
+#define VT100_RESET VT100_ESC  "0m"
+#define VT100_BOLD_FG VT100_ESC  "1m"
+#define VT100_ULINE VT100_ESC  "4m"
+#define VT100_ULINE_OFF VT100_ESC  "24m"
+#define VT100_COLOR_SWAP VT100_ESC  "7m"
+
+#define VT100_FG_RED VT100_ESC  "31m"
+#define VT100_FG_GREEN VT100_ESC  "32m"
+#define VT100_FG_YELLOW VT100_ESC  "33m"
+#define VT100_FG_BLUE VT100_ESC  "34m"
+#define VT100_FG_CYAN VT100_ESC  "36m"
+#define VT100_FG_WHITE VT100_ESC  "37m"
 
 #define VT100_FG_RED_BOLD VT100_BOLD_FG VT100_FG_RED
 #define VT100_FG_GREEN_BOLD VT100_BOLD_FG VT100_FG_GREEN
@@ -31,10 +28,42 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 #define VT100_FG_CYAN_BOLD VT100_BOLD_FG VT100_FG_CYAN
 #define VT100_FG_WHITE_BOLD VT100_BOLD_FG VT100_FG_WHITE
 
-#define VT100_BG_BLACK VT100_CSI "40m"
-#define VT100_BG_RED VT100_CSI "41m"
-#define VT100_BG_GREEN VT100_CSI "42m"
-#define VT100_BG_YELLOW VT100_CSI "43m"
-#define VT100_BG_BLUE VT100_CSI "44m"
+#define VT100_BG_BLACK VT100_ESC  "40m"
+#define VT100_BG_RED VT100_ESC  "41m"
+#define VT100_BG_GREEN VT100_ESC  "42m"
+#define VT100_BG_YELLOW VT100_ESC  "43m"
+#define VT100_BG_BLUE VT100_ESC  "44m"
 
-#endif // VT100_VT100WIN10_INCLUDED
+#else   // ! (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+
+#define VT100_ESC  ""
+// #define VT100_ESCAPE  "\x1b["
+
+#define VT100_CLS  ""
+#define VT100_RESET  ""
+#define VT100_BOLD_FG  ""
+#define VT100_ULINE  ""
+#define VT100_ULINE_OFF  ""
+#define VT100_COLOR_SWAP  ""
+
+#define VT100_FG_RED  ""
+#define VT100_FG_GREEN  ""
+#define VT100_FG_YELLOW  ""
+#define VT100_FG_BLUE  ""
+#define VT100_FG_CYAN  ""
+#define VT100_FG_WHITE  ""
+
+#define VT100_FG_RED_BOLD  ""
+#define VT100_FG_GREEN_BOLD  ""
+#define VT100_FG_YELLOW_BOLD  ""
+#define VT100_FG_BLUE_BOLD  ""
+#define VT100_FG_CYAN_BOLD  ""
+#define VT100_FG_WHITE_BOLD  ""
+
+#define VT100_BG_BLACK  ""
+#define VT100_BG_RED  ""
+#define VT100_BG_GREEN  ""
+#define VT100_BG_YELLOW  ""
+#define VT100_BG_BLUE  ""
+
+#endif // ! (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
