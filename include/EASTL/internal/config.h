@@ -89,8 +89,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef EASTL_VERSION
-	#define EASTL_VERSION   "3.16.07"
-	#define EASTL_VERSION_N  31607
+#define EASTL_VERSION "3.16.07"
+#define EASTL_VERSION_N 31607
+#endif
+
+#ifndef DBJ_EASTL_VERSION
+#define DBJ_EASTL_VERSION EASTL_VERSION ".DBJ"
+#define DBJ_EASTL_VERSION_N EASTL_VERSION_N * 10
 #endif
 
 
