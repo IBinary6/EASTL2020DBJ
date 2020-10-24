@@ -20,3 +20,10 @@ const char * const EASTL2020DBJ ( void )
 	return buf_;
 }
 }
+
+/*
+did the manual fix 
+
+problem explained here
+https://developercommunity.visualstudio.com/content/problem/1110835/clangcl-ltcg-is-passed-to-llvm-lib.html
+*/
