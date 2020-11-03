@@ -111,7 +111,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0  /DWINVER=0x0A00 /D_WIN32_WINNT=0x0A00</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -134,7 +134,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0  /DWINVER=0x0A00 /D_WIN32_WINNT=0x0A00</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -160,7 +160,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0  /DWINVER=0x0A00 /D_WIN32_WINNT=0x0A00</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -183,7 +183,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0  /DWINVER=0x0A00 /D_WIN32_WINNT=0x0A00</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
