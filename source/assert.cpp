@@ -63,7 +63,7 @@ namespace eastl
 	{
 		#if EASTL_ASSERT_ENABLED
 			#if defined(EA_PLATFORM_MICROSOFT)
-				printf("%s\n", pExpression); // Write the message to stdout
+				// DBJ removed --> printf("%s\n", pExpression); // Write the message to stdout
 				if( ::IsDebuggerPresent())
 				{
 					OutputDebugStringA(pExpression);
