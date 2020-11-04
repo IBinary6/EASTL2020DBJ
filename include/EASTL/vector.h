@@ -89,7 +89,10 @@ namespace eastl
 	/// EASTL_VECTOR_DEFAULT_ALLOCATOR
 	///
 	#ifndef EASTL_VECTOR_DEFAULT_ALLOCATOR
-		#define EASTL_VECTOR_DEFAULT_ALLOCATOR allocator_type(EASTL_VECTOR_DEFAULT_NAME)
+	// DBJ : CHANGED
+	// has no ctor
+		// #define EASTL_VECTOR_DEFAULT_ALLOCATOR allocator_type(EASTL_VECTOR_DEFAULT_NAME)
+		#define EASTL_VECTOR_DEFAULT_ALLOCATOR allocator_type()
 	#endif
 
 
@@ -398,7 +401,7 @@ namespace eastl
 	inline VectorBase<T, Allocator>::VectorBase()
 		: mpBegin(NULL), 
 		  mpEnd(NULL),
-		  mCapacityAllocator(NULL, allocator_type(EASTL_VECTOR_DEFAULT_NAME))
+		  mCapacityAllocator(NULL, allocator_type(/* DBJ : CHANGED : EASTL_VECTOR_DEFAULT_NAME*/))
 	{
 	}
 
@@ -465,7 +468,9 @@ namespace eastl
 		// This is fine, as our default ctor initializes with NULL pointers. 
 		if(EASTL_LIKELY(n))
 		{
-			auto* p = (T*)allocate_memory(internalAllocator(), n * sizeof(T), EASTL_ALIGN_OF(T), 0);
+			// auto* p = (T*)allocate_memory(internalAllocator(), n * sizeof(T), EASTL_ALIGN_OF(T), 0);
+			// DBJ : CHANGED to this
+			auto* p = (T*)eastl::allocator::allocate_aligned ( n * sizeof(T), EASTL_ALIGN_OF(T), 0 );
 			EASTL_ASSERT_MSG(p != nullptr, "the behaviour of eastl::allocators that return nullptr is not defined.");
 			return p;
 		}
