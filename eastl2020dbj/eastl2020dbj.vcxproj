@@ -111,7 +111,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0 /D_UNICODE</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -137,7 +137,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0 /D_UNICODE</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -163,7 +163,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0 /D_UNICODE</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -189,7 +189,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=0  /D_HAS_EXCEPTIONS=0 /D_UNICODE</AdditionalOptions>
+      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>

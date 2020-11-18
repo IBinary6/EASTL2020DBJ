@@ -31,11 +31,33 @@ namespace dbj {
 // between implementations
 
 // the feasibility of this is a moot point 
-		#if EASTL_NAME_ENABLED
-			static const char* const name ; 
+		#if 1 // EASTL_NAME_ENABLED
+			const char* name ; 
+
+			heap(const char* some_name_)
+				: name(some_name_)
+			{
+			}
+
+			heap() : name("dbj::heap") {}
+
+			heap& operator = (const dbj::heap& other_ )
+			{
+				if ( this != &other_ ) 
+					this->name = other_.name;
+				return *this;
+			}
+
 		#endif
 	};
+
 } // dbj
+
+namespace eastl
+{
+	// EASTL requires this ...
+	inline bool operator == (dbj::heap const&, dbj::heap const&) { return true;  }
+}
 
 namespace eastl
 {

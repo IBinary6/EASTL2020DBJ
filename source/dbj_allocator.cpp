@@ -4,6 +4,7 @@
 
 namespace dbj {
 #ifndef EASTL_USER_DEFINED_ALLOCATOR	
+
 		#if EASTL_NAME_ENABLED
 			const char* const heap::name{ EASTL_NAME_VAL(EASTL_ALLOCATOR_DEFAULT_NAME) } ;
 		#endif
