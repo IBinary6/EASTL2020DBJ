@@ -10,7 +10,7 @@ namespace dbj {
 		#endif
 
 // this is a default implementation
-// if you think it is feasible to changes it, please do
+// if you think it is feasible to change it, please do
 
 void* heap::allocate(size_t size_  , int /*flags_ = 0 */) noexcept 
 {
