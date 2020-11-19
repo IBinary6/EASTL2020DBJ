@@ -110,8 +110,8 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalOptions>/D_KERNEL_MODE</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -136,8 +136,8 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalOptions>/D_KERNEL_MODE</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -162,8 +162,8 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalOptions>/D_KERNEL_MODE</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -188,8 +188,8 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalOptions>/D_HAS_EXCEPTIONS=1 </AdditionalOptions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalOptions>/D_KERNEL_MODE</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>

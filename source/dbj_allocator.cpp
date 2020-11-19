@@ -3,7 +3,7 @@
 (c) 2019-2020 by dbj.org   -- LICENSE DBJ -- https://dbj.org/license_dbj/
 */
 
-#ifdef _WIN32
+#ifdef DBJ_USE_WIN32_ALLOC
 #ifdef __STDC_ALLOC_LIB__
 #define __STDC_WANT_LIB_EXT2__ 1
 #else
@@ -29,19 +29,17 @@
 
 #define DBJ_FREE(P_) HeapFree(GetProcessHeap(), 0, (void*)P_)
 
-#else // ! WIN32
+#else // ! DBJ_USE_WIN32_ALLOC
 
 /// standard allocation
 /// be advised clang can do some serious magic 
 /// while optimizing these calls
 
 #define DBJ_CALLOC(S_,T_) calloc( S_ , sizeof(T_))
-
 #define DBJ_MALLOC(S_)malloc( S_ )
-
 #define DBJ_FREE(P_) free(P_)
 
-#endif // ! _WIN32
+#endif // ! DBJ_USE_WIN32_ALLOC
 
 // #include <EASTL/internal/config.h>
 #include <EASTL/allocator.h>
@@ -58,19 +56,19 @@ namespace dbj {
 
 void* heap::allocate(size_t size_  , int /*flags_ = 0 */) noexcept 
 {
-	return DBJ_MALLOC( size_ ) ;
+	return DBJ_MALLOC( size_) ;
 }
 void  heap::deallocate(void* pointer_  , size_t size_ ) noexcept
 {
-	DBJ_FREE( pointer_ ) ;
+	DBJ_FREE(pointer_);
 }
 void* heap::allocate_aligned(size_t size_, size_t alignment_ , size_t /*offset*/, int /*flags = 0 */ ) noexcept
 {
-	return DBJ_MALLOC( size_ ) ;
+	return DBJ_MALLOC( size_) ;
 }
 void  heap::deallocate_aligned(void* pointer_ , size_t /*size_*/ ) noexcept
 {
-	DBJ_FREE( pointer_ ) ;
+	DBJ_FREE(pointer_);
 }
 
 #endif  // EASTL_USER_DEFINED_ALLOCATOR	
