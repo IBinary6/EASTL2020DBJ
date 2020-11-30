@@ -32,6 +32,7 @@ namespace dbj {
 
 // the feasibility of this is a moot point 
 		#if 1 // EASTL_NAME_ENABLED
+
 			const char* name ; 
 
 			heap(const char* some_name_)
@@ -39,7 +40,7 @@ namespace dbj {
 			{
 			}
 
-			heap() : name("dbj::heap") {}
+			heap() : name(EASTL_NAME_VAL(EASTL_ALLOCATOR_DEFAULT_NAME)) {}
 
 			heap& operator = (const dbj::heap& other_ )
 			{
