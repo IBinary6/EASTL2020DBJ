@@ -6,8 +6,6 @@ Sep/Oct 2020
 
 Well first of all these days it is [not possible](https://github.com/electronicarts/EASTL/issues/302) just to simply git pull the EASTL. So I had to download the source using vcpkg. Then I did some local shenanigans, some copies, builds and runs; and then pushed the result to this repository.
 
-**Update [2020 Oct 20]**  Hm, it seems that is possible (again)? Just [did a normal fork](https://github.com/dbj-systems/EASTL).
-
 Ok, so why this? In all of my innocence I had grand plans for EASTL use over "here". Alas. Soon, I have faced the reality. By 2020 EASTL has become big and over engineered. Not to my liking at all. Thus.
 
 ### The plan and the results
