@@ -28,7 +28,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7A4E3966-F40B-43A0-8AD9-6FF977F0EEC7}</ProjectGuid>
+    <ProjectGuid>{D11157E0-1280-4EEB-B0B4-9594317FE2F0}</ProjectGuid>
     <RootNamespace>dbjeastlnocppx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
