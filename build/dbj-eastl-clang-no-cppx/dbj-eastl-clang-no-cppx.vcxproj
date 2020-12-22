@@ -31,6 +31,7 @@
     <ProjectGuid>{58A43EF2-685D-4E7E-865A-8872CAE2ED82}</ProjectGuid>
     <RootNamespace>dbjeastlclangnocppx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>lib-dbj-eastl-clang-no-cppx</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -86,7 +87,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\DEVL\GITHUB\serverside.systems\dbj-bench\EASTL2020CORE\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\include\eastl_dbj\include;D:\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
@@ -94,7 +95,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>D:\DEVL\GITHUB\serverside.systems\dbj-bench\EASTL2020CORE\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\include\eastl_dbj\include;D:\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
