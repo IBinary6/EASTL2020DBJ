@@ -1,5 +1,13 @@
+# ABANDONED
 
-Sep/Oct 2020
+EASTL is peculiar but not better than MS STL (at least). MS STL in a "SEH MODE" (SEH == Structured Exception Handling) is plenty fast and 99% standard C++ beside cpp exceptions and unwinding not being used. 
+
+Using MS STL in a "SEH mode" actually means not using standard C++ std:: and that is a good thing.
+
+Also EASTL is not that open and that is annoying. 
+
+## Sep/Oct 2020
+
 ![results_2020_oct](./media/2020_OCT_screen.png)
 
 ## Now what is this? Yet another EASTL, not-a-fork?
